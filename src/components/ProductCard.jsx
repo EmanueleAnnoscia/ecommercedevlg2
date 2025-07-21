@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
-import { useAppContext } from '../context/AppContext'; 
+import { useAppContext } from '../context/AppContext';
 import styles from './ProductCard.module.css';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useRef } from 'react'; // Importa useRef
-import TooltipPortal from './TooltipPortal'; 
+import TooltipPortal from './TooltipPortal';
 
 const ProductCard = ({ product, showWishlistButton = true, viewMode = 'grid' }) => {
+
   const { addToCart, cart, wishlist = [], toggleWishlist, showAlert } = useAppContext();
   const wishlistButtonRef = useRef(null); // Crea un ref per il bottone del cuore
 
@@ -27,7 +28,7 @@ const ProductCard = ({ product, showWishlistButton = true, viewMode = 'grid' }) 
       slug: product.slug,
       name: product.name,
       price: product.price,
-      image: product.img_url,
+      img_url: product.img_url,
       discount: product.discount,
       quantity: 1,
       maxStock: product.stock

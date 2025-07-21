@@ -73,46 +73,46 @@ export const AppProvider = ({ children }) => {
 
     //funzione di aggiunta al carrello
     const addToCart = (product) => {
-    console.log(product);
+        console.log(product);
 
-    setCart(prevCart => {
-        const existing = prevCart.find(item => item.slug === product.slug);
+        setCart(prevCart => {
+            const existing = prevCart.find(item => item.slug === product.slug);
 
-        const existingQuantity = existing ? existing.quantity : 0;
-        const totalRequested = existingQuantity + product.quantity;
+            const existingQuantity = existing ? existing.quantity : 0;
+            const totalRequested = existingQuantity + product.quantity;
 
-        if (totalRequested > product.stock) {
-            showAlert(
-                `Hai superato la quantità disponibile per "${product.name}". Disponibili: ${product.stock}`,
-                'error'
-            );
-            return prevCart;
-        } else {
-            showAlert(`${product.name} aggiunto al carrello!`, 'success');
-        }
+            if (totalRequested > product.stock) {
+                showAlert(
+                    `Hai superato la quantità disponibile per "${product.name}". Disponibili: ${product.stock}`,
+                    'error'
+                );
+                return prevCart;
+            } else {
+                showAlert(`${product.name} aggiunto al carrello!`, 'success');
+            }
 
-        if (existing) {
-            return prevCart.map(item =>
-                item.slug === product.slug
-                    ? { ...item, quantity: item.quantity + product.quantity }
-                    : item
-            );
-        }
+            if (existing) {
+                return prevCart.map(item =>
+                    item.slug === product.slug
+                        ? { ...item, quantity: item.quantity + product.quantity }
+                        : item
+                );
+            }
 
-        return [
-            ...prevCart,
-            {
-                slug: product.slug,
-                name: product.name,
-                price: product.price,
-                discount: product.discount,
-                stock: product.stock,
-                img_url: product.img_url,
-                quantity: product.quantity,
-            },
-        ];
-    });
-};
+            return [
+                ...prevCart,
+                {
+                    slug: product.slug,
+                    name: product.name,
+                    price: product.price,
+                    discount: product.discount,
+                    stock: product.stock,
+                    img_url: product.img_url,
+                    quantity: product.quantity,
+                },
+            ];
+        });
+    };
 
 
 

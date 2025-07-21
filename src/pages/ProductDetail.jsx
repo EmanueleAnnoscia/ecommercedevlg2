@@ -229,13 +229,13 @@ const ProductDetail = () => {
               <TooltipPortal targetRef={wishlistButtonRef}>
                 {isWishlisted ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"}
               </TooltipPortal>
-              <button
+              {/* <button
                 className={styles.compareButton}
                 onClick={handleCompare}
                 title="Confronta"
               >
                 <FaBalanceScale />
-              </button>
+              </button> */}
 
             </h1>
             <p className={styles.productDescription}>{product.description}</p>

@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Facebook, Instagram, Twitter } from 'lucide-react'; // 👈 import icone
 import styles from './AppFooter.module.css';
-
 
 const AppFooter = () => {
   return (
@@ -15,9 +14,15 @@ const AppFooter = () => {
               Stampe d'arte di alta qualità nel formato 45x75 cm per trasformare i tuoi spazi.
             </p>
             <div className={styles.social}>
-              <a href="#" className={styles.socialLink}>📘</a>
-              <a href="#" className={styles.socialLink}>📷</a>
-              <a href="#" className={styles.socialLink}>🐦</a>
+              <a href="#" className={styles.socialLink} aria-label="Facebook">
+                <Facebook size={24} />
+              </a>
+              <a href="#" className={styles.socialLink} aria-label="Instagram">
+                <Instagram size={24} />
+              </a>
+              <a href="#" className={styles.socialLink} aria-label="Twitter">
+                <Twitter size={24} />
+              </a>
             </div>
           </div>
 
@@ -28,16 +33,6 @@ const AppFooter = () => {
               <Link to="/about" className={styles.link}>Chi siamo</Link>
               <Link to="/gallery" className={styles.link}>Galleria</Link>
               <Link to="/contact" className={styles.link}>Contatti</Link>
-            </nav>
-          </div>
-
-          <div className={styles.section}>
-            <h4 className={styles.sectionTitle}>Servizio Clienti</h4>
-            <nav className={styles.links}>
-              <Link to="/shipping" className={styles.link}>Spedizioni</Link>
-              <Link to="/returns" className={styles.link}>Resi</Link>
-              <Link to="/faq" className={styles.link}>FAQ</Link>
-              <Link to="/privacy" className={styles.link}>Privacy</Link>
             </nav>
           </div>
 

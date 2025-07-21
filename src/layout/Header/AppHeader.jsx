@@ -26,7 +26,7 @@ const AppHeader = () => {
     { name: 'Chi siamo', path: '/about' },
     { name: 'Galleria Stampe', path: '/gallery' },
     { name: 'Contatti', path: '/contact' },
-    { name: 'Confronta Prodotti', path: '/compare' }
+    // { name: 'Confronta Prodotti', path: '/compare' }
 
   ];
 

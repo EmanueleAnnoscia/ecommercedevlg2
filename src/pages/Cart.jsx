@@ -80,7 +80,7 @@ const Cart = () => {
     );
   }
 
-
+ 
   // interfaccia se ci sono prodotti nel carrello
   return (
     <div className={styles.cart}>
@@ -101,6 +101,7 @@ const Cart = () => {
             {cart.map((item) => {
               const discountedPrice = getDiscountedPrice(item);
               const totalItemPrice = discountedPrice * item.quantity;
+              
               return (
 
                 // immagine prodotto
@@ -108,7 +109,6 @@ const Cart = () => {
                   <div className={styles.itemImage}>
                     <img src={item.img_url} alt={item.name} />
                   </div>
-
                   {/* nome prodotto, prezzo originale, prezzo scontato e gestione disponibilità */}
                   <div className={styles.itemInfo}>
                     <h3 className={styles.itemName}>{item.name}</h3>

@@ -73,34 +73,47 @@ export const AppProvider = ({ children }) => {
 
     //funzione di aggiunta al carrello
     const addToCart = (product) => {
-        console.log(product)
-        setCart(prevCart => {
-            const existing = prevCart.find(item => item.slug === product.slug);
+    console.log(product);
 
-            const existingQuantity = existing ? existing.quantity : 0;
-            const totalRequested = existingQuantity + product.quantity;
+    setCart(prevCart => {
+        const existing = prevCart.find(item => item.slug === product.slug);
 
-            if (totalRequested > product.stock) {
-                if (totalRequested > product.stock) {
-                    showAlert(`Hai superato la quantità disponibile per "${product.name}". Disponibili: ${product.stock}`, `error`);
-                    return prevCart;
-                }
-            } else {
-                // Show success feedback
-                showAlert(`${product.name} aggiunto al carrello!`, 'success');
-            }
+        const existingQuantity = existing ? existing.quantity : 0;
+        const totalRequested = existingQuantity + product.quantity;
 
-            if (existing) {
-                return prevCart.map(item =>
-                    item.slug === product.slug
-                        ? { ...item, quantity: item.quantity + product.quantity }
-                        : item
-                );
-            }
+        if (totalRequested > product.stock) {
+            showAlert(
+                `Hai superato la quantità disponibile per "${product.name}". Disponibili: ${product.stock}`,
+                'error'
+            );
+            return prevCart;
+        } else {
+            showAlert(`${product.name} aggiunto al carrello!`, 'success');
+        }
 
-            return [...prevCart, product];
-        });
-    };
+        if (existing) {
+            return prevCart.map(item =>
+                item.slug === product.slug
+                    ? { ...item, quantity: item.quantity + product.quantity }
+                    : item
+            );
+        }
+
+        return [
+            ...prevCart,
+            {
+                slug: product.slug,
+                name: product.name,
+                price: product.price,
+                discount: product.discount,
+                stock: product.stock,
+                img_url: product.img_url,
+                quantity: product.quantity,
+            },
+        ];
+    });
+};
+
 
 
     //funzione di rimozione dal carrello

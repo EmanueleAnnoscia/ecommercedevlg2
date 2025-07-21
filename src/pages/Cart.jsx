@@ -126,13 +126,13 @@ const Cart = () => {
                       <p className={styles.itemPrice}>{formatPrice(item.price)}</p>
                     )}
 
-                    <span className={item.maxStock > 0 ? styles.inStock : styles.outOfStock}>
+                    {/* <span className={item.maxStock > 0 ? styles.inStock : styles.outOfStock}>
                       {item.maxStock > 0
                         ? item.maxStock < 5
                           ? `Solo ${item.maxStock} rimasti`
                           : 'Disponibile'
                         : 'Non disponibile'}
-                    </span>
+                    </span> */}
                   </div>
 
                   {/* gestione di aggiungere o togliere lo stesso prodotto + rimuove il prodotto dal carrello */}

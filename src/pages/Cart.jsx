@@ -80,7 +80,7 @@ const Cart = () => {
     );
   }
 
- 
+
   // interfaccia se ci sono prodotti nel carrello
   return (
     <div className={styles.cart}>
@@ -101,7 +101,7 @@ const Cart = () => {
             {cart.map((item) => {
               const discountedPrice = getDiscountedPrice(item);
               const totalItemPrice = discountedPrice * item.quantity;
-              
+
               return (
 
                 // immagine prodotto
@@ -138,13 +138,24 @@ const Cart = () => {
                   {/* gestione di aggiungere o togliere lo stesso prodotto + rimuove il prodotto dal carrello */}
                   <div className={styles.itemActions}>
                     <div className={styles.quantityControls}>
-                      <button
-                        className={styles.quantityButton}
-                        onClick={() => updateQuantity(item.slug, item.quantity - 1)}
-                      >
-                        −
-                      </button>
+                      {item.quantity > 1 ? (
+                        <button
+                          className={styles.quantityButton}
+                          onClick={() => updateQuantity(item.slug, item.quantity - 1)}
+                        >
+                          −
+                        </button>
+                      ) : (
+                        <button
+                          className={styles.quantityButton}
+                          onClick={() => removeItem(item.slug)} // Funzione che rimuove l'item dal carrello
+                        >
+                          🗑️
+                        </button>
+                      )}
                       <span className={styles.quantity}>{item.quantity}</span>
+
+
                       <button
                         className={styles.quantityButton}
                         onClick={() => updateQuantity(item.slug, item.quantity + 1)}

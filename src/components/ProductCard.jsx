@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { useAppContext } from '../context/AppContext'; 
+import { useAppContext } from '../context/AppContext';
 import styles from './ProductCard.module.css';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useRef } from 'react'; // Importa useRef
-import TooltipPortal from './TooltipPortal'; 
+import TooltipPortal from './TooltipPortal';
 
 const ProductCard = ({ product, showWishlistButton = true, viewMode = 'grid' }) => {
   const { addToCart, cart, wishlist = [], toggleWishlist, showAlert } = useAppContext();
@@ -112,11 +112,10 @@ const ProductCard = ({ product, showWishlistButton = true, viewMode = 'grid' }) 
         <div className={styles.stock}>
           <span className={product.stock > 0 ? styles.inStock : styles.outOfStock}>
             {product.stock > 0
-              ? product.stock < 5
-                ? `Solo ${product.stock} rimasti`
-                : 'Disponibile'
-              : 'Non disponibile'}
+              ? `Ancora ${product.stock} disponibili`
+              : 'Non più disponibile'}
           </span>
+
           <button
             className={`${styles.addToCartButton} ${product.stock === 0 ? styles.disabled : ''}`}
             onClick={handleAddToCart}

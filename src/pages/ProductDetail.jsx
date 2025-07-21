@@ -88,11 +88,16 @@ const ProductDetail = () => {
       try {
         const { data } = await fetchFilteredPrints({
           genre: product.genre_name,
-          // limit: 8
         });
 
         const filtered = data.filter(p => p.slug !== product.slug);
-        setRelatedProducts(filtered);
+
+        if (filtered.length > 0) {
+          setRelatedProducts(filtered);
+        } else {
+          setRelatedProducts([]); // svuota comunque per sicurezza
+        }
+
       } catch (err) {
         console.error('Errore nel caricamento dei prodotti correlati:', err);
       }
@@ -100,6 +105,7 @@ const ProductDetail = () => {
 
     loadRelatedProducts();
   }, [product]);
+
 
   if (isLoading) {
     return <div className={styles.loading}>Caricamento...</div>;
@@ -314,15 +320,17 @@ const ProductDetail = () => {
 
 
         </div>
-        <div className={styles.boxcarousel}>
         {relatedProducts.length > 0 && (
-          <ProductCarousel
-            title={`Altri in ${product.genre_name}`}
-            products={relatedProducts}
-            viewAllLink={`/gallery?genre=${encodeURIComponent(product.genre_name)}`}
-          />
+          <div className={styles.boxcarousel}>
+            <ProductCarousel
+              title={`Altri in ${product.genre_name}`}
+              products={relatedProducts}
+              viewAllLink={`/gallery?genre=${encodeURIComponent(product.genre_name)}`}
+            />
+          </div>
         )}
-        </div>
+
+
       </div>
     </div>
   );

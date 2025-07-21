@@ -10,7 +10,7 @@ const Gallery = () => {
   const { viewMode, sortBy, products } = useAppContext();
 
   const [page, setPage] = useState(1)
-  const [limit, setLimit] = useState(10)
+  const [limit, setLimit] = useState(9)
   const [pagedProducts, setPagedProducts] = useState([])
   const [totalPages, setTotalPages] = useState(1);
 
@@ -61,9 +61,9 @@ const Gallery = () => {
         <div className={styles.controls}>
           <label>Prodotti per pagina: </label>
           <select value={limit} onChange={(e) => { setLimit(Number(e.target.value)); setPage(1) }}>
-            <option value={5}>5</option>
-            <option value={10}>10</option>
-            <option value={20}>20</option>
+            <option value={9}>9</option>
+            <option value={15}>15</option>
+            <option value={21}>21</option>
           </select>
         </div>
 

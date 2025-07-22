@@ -1,4 +1,3 @@
-
 .header {
   position: fixed;
   top: 0;
@@ -195,18 +194,25 @@
     position: absolute;
     top: 100%;
     left: 0;
-    right: 0;
+    width: 100vw;
     background: white;
     flex-direction: column;
-    padding: 20px;
+    padding: 20px 16px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transform: translateY(-10px);
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+    max-height: calc(100vh - 70px);
+    display: none;
+    /* Nascondi di default */
   }
 
   .navOpen {
+    display: flex;
+    /* Mostra solo quando attivo */
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
@@ -234,3 +240,48 @@
   }
 }
 
+
+
+@media (max-width: 480px) {
+
+
+  @media (max-width: 480px) {
+    .nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100vw;
+      background: white;
+      flex-direction: column;
+      padding: 20px 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transform: translateY(-10px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      overflow-y: auto;
+
+      /* 👇 aumentata la max-height */
+      max-height: calc(100vh - 50px);
+    }
+
+    .navOpen {
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+      display: flex;
+    }
+  }
+
+
+  .actions {
+
+    gap: 0.3rem;
+  }
+
+  .wishlistButton {
+
+    margin: 0;
+
+  }
+}

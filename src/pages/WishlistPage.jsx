@@ -21,16 +21,16 @@ const Wishlist = () => {
       <div className={styles.container}>
 
         <div className={styles.header}>
-          <h1 className={styles.title}>La tua Wishlist</h1>
+          <h1 className={styles.title}>La tua lista preferiti</h1>
           {wishlist.length > 0 && (
             <button className={styles.clearButton} onClick={() => setShowModal(true)}>
-              Svuota Wishlist
+              Svuota lista preferiti
             </button>
           )}
         </div>
 
         {wishlist.length === 0 ? (
-          <p className={styles.empty}>Nessun prodotto nella wishlist.</p>
+          <p className={styles.empty}>Nessun prodotto nella lista preferiti.</p>
         ) : (
           <>
             <div className={styles.grid}>
@@ -49,7 +49,7 @@ const Wishlist = () => {
         {showModal && (
           <div className={styles.modalOverlay}>
             <div className={styles.modal}>
-              <p>Sei sicuro di voler svuotare la wishlist?</p>
+              <p>Sei sicuro di voler svuotare la lista preferiti?</p>
               <div className={styles.modalButtons}>
                 <button onClick={handleClear} className={styles.confirm}>
                   Sì, svuota
@@ -68,7 +68,7 @@ const Wishlist = () => {
         isOpen={isModalOpen}
         onConfirm={handleClear}
         onCancel={() => setIsModalOpen(false)}
-        message="Sei sicuro di voler svuotare la wishlist?"
+        message="Sei sicuro di voler svuotare la lista preferiti?"
       />
     </div>
   );

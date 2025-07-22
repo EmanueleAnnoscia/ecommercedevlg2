@@ -129,7 +129,6 @@ const CheckoutForm = ({
                     formatPrice={formatPrice}
                     clearCart={clearCart}
                     formData={formData}
-
                     discountValue={discountValue}
                     couponCode={couponCode}
 

@@ -5,8 +5,11 @@ import ProductCard from './ProductCard';
 import styles from './ProductCarousel.module.css';
 
 const ProductCarousel = ({ title, products, viewAllLink }) => {
+
+  if (!products || products.length === 0) return null;
   // ✅ Filtra solo i prodotti disponibili
   const availableProducts = products.filter(product => product.stock > 0);
+  if (availableProducts.length === 0) return null;
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerView = 4;

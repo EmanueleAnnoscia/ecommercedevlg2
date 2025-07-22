@@ -117,7 +117,9 @@ const ProductCard = ({ product, showWishlistButton = true, viewMode = 'grid' }) 
                 ? `Solo ${product.stock} rimasti`
                 : `${product.stock} Disponibili`
               : 'Non disponibile'}
+
           </span>
+
           <button
             className={`${styles.addToCartButton} ${product.stock === 0 ? styles.disabled : ''}`}
             onClick={handleAddToCart}

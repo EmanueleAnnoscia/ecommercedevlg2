@@ -1,9 +1,46 @@
-import React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Twitter } from 'lucide-react'; // 👈 import icone
 import styles from './AppFooter.module.css';
+import axios from 'axios';
+import Alert from '../../components/Alert';
 
 const AppFooter = () => {
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertType, setAlertType] = useState('success'); // 'success' o 'error'
+
+  const handleNewsletterSubmit = async (e) => {
+    e.preventDefault();
+    const emailInput = e.target.elements.email.value.trim();
+    if (!emailInput) return;
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/email/newsletter`,
+        { email: emailInput }
+      );
+
+      if (response.status === 200) {
+        setAlertMessage('Iscrizione avvenuta con successo! 🎉');
+        setAlertType('success');
+        setAlertVisible(true);
+        e.target.reset();
+      } else {
+        setAlertMessage('Errore durante l\'iscrizione. Riprova.');
+        setAlertType('error');
+        setAlertVisible(true);
+      }
+
+    } catch (error) {
+      setAlertMessage('Errore durante l\'invio. Controlla la connessione.');
+      setAlertType('error');
+      setAlertVisible(true);
+    }
+  };
+
+
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -41,9 +78,11 @@ const AppFooter = () => {
             <p className={styles.newsletterText}>
               Ricevi le nostre ultime novità e offerte speciali
             </p>
-            <form className={styles.newsletterForm}>
+
+            <form className={styles.newsletterForm} onSubmit={handleNewsletterSubmit}>
               <input
                 type="email"
+                name="email"   // 👈 nome necessario per leggerlo nella funzione
                 placeholder="La tua email"
                 className={styles.newsletterInput}
               />
@@ -51,6 +90,7 @@ const AppFooter = () => {
                 Iscriviti
               </button>
             </form>
+
           </div>
         </div>
 
@@ -68,6 +108,14 @@ const AppFooter = () => {
           </div>
         </div>
       </div>
+
+      <Alert
+        message={alertMessage}
+        visible={alertVisible}
+        onClose={() => setAlertVisible(false)}
+        type={alertType}
+      />
+
     </footer>
   );
 };

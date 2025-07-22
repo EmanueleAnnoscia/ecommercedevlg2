@@ -31,7 +31,7 @@ const ProductCard = ({ product, showWishlistButton = true, viewMode = 'grid' }) 
       img_url: product.img_url,
       discount: product.discount,
       quantity: 1,
-      maxStock: product.stock
+      stock: product.stock
     });
   };
 
@@ -113,8 +113,11 @@ const ProductCard = ({ product, showWishlistButton = true, viewMode = 'grid' }) 
         <div className={styles.stock}>
           <span className={product.stock > 0 ? styles.inStock : styles.outOfStock}>
             {product.stock > 0
-              ? `Ancora ${product.stock} disponibili`
-              : 'Non più disponibile'}
+              ? product.stock < 5
+                ? `Solo ${product.stock} rimasti`
+                : `${product.stock} Disponibili`
+              : 'Non disponibile'}
+
           </span>
 
           <button

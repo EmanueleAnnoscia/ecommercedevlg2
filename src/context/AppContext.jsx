@@ -106,9 +106,9 @@ export const AppProvider = ({ children }) => {
                     name: product.name,
                     price: product.price,
                     discount: product.discount,
-                    stock: product.stock,
                     img_url: product.img_url,
                     quantity: product.quantity,
+                    maxStock: product.stock
                 },
             ];
         });

@@ -1,18 +1,36 @@
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import styles from './ProductCarousel.module.css';
 
 const ProductCarousel = ({ title, products, viewAllLink }) => {
-
   if (!products || products.length === 0) return null;
-  // ✅ Filtra solo i prodotti disponibili
+
   const availableProducts = products.filter(product => product.stock > 0);
   if (availableProducts.length === 0) return null;
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerView = 4;
+  const [itemsPerView, setItemsPerView] = useState(getItemsPerView());
+
+  // ✅ Rileva dimensione schermo per adattare itemsPerView
+  useEffect(() => {
+    const handleResize = () => {
+      setItemsPerView(getItemsPerView());
+      setCurrentIndex(0); // reset per sicurezza su resize
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  function getItemsPerView() {
+    const width = window.innerWidth;
+    if (width <= 480) return 1;
+    if (width <= 768) return 2;
+    if (width <= 1024) return 3;
+    return 4; // desktop
+  }
+
   const maxIndex = Math.max(0, availableProducts.length - itemsPerView);
 
   const goToPrevious = () => {
@@ -79,6 +97,5 @@ const ProductCarousel = ({ title, products, viewAllLink }) => {
     </div>
   );
 };
-
 
 export default ProductCarousel;

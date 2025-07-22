@@ -4,11 +4,15 @@ import { Facebook, Instagram, Twitter } from 'lucide-react'; // 👈 import icon
 import styles from './AppFooter.module.css';
 import axios from 'axios';
 import Alert from '../../components/Alert';
+import { useLocation } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 
 const AppFooter = () => {
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertType, setAlertType] = useState('success'); // 'success' o 'error'
+  const location = useLocation();
+  const emailRef = useRef();
 
   const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
@@ -38,6 +42,12 @@ const AppFooter = () => {
       setAlertVisible(true);
     }
   };
+
+  useEffect(() => {
+    if (emailRef.current) {
+      emailRef.current.value = '';
+    }
+  }, [location.pathname]);
 
 
 
@@ -81,6 +91,7 @@ const AppFooter = () => {
 
             <form className={styles.newsletterForm} onSubmit={handleNewsletterSubmit}>
               <input
+                ref={emailRef}
                 type="email"
                 name="email"   // 👈 nome necessario per leggerlo nella funzione
                 placeholder="La tua email"

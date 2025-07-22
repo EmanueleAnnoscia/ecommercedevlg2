@@ -46,19 +46,19 @@ const WelcomePopup = () => {
     setMessage('');
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/email/send-test-email`, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/email/send-discount`, {
         recipientEmail: email,
-        subject: 'Benvenuto in BoolShop! Il tuo buono sconto del 10% ti aspetta!',
+        subject: 'Benvenuto in BoolShop! Il tuo buono sconto del 20% ti aspetta!',
         messageHtml: `
           <p>Ciao ${email},</p>
           <p>Grazie mille per esserti iscritto alla newsletter di BoolShop!</p>
-          <p>Come promesso, ecco il tuo <strong>buono sconto del 10%</strong> sul tuo prossimo acquisto:</p>
-          <h3 style="color: #007BFF;">${discountCode}</h3>
+          <p>Come promesso, ecco il tuo <strong>buono sconto del 20%</strong> sul tuo prossimo acquisto:</p>
+          <h3 style="color: #007BFF;"> SUMMER20 </h3>
           <p>Speriamo tu possa trovare qualcosa di fantastico!</p>
           <p>A presto,</p>
           <p>Il Team di BoolShop</p>
         `,
-        messageText: `Ciao ${email},\nGrazie mille per esserti iscritto alla newsletter di BoolShop!\nCome promesso, ecco il tuo buono sconto del 10% sul tuo prossimo acquisto: ${discountCode}\nSperiamo tu possa trovare qualcosa di fantastico!\nA presto,\nIl Team di BoolShop`
+        messageText: `Ciao ${email},\nGrazie mille per esserti iscritto alla newsletter di BoolShop!\nCome promesso, ecco il tuo buono sconto del 10% sul tuo prossimo acquisto: SUMMER20 \nSperiamo tu possa trovare qualcosa di fantastico!\nA presto,\nIl Team di BoolShop`
       });
 
       setMessage("Grazie! Ti abbiamo inviato un'email di benvenuto e il tuo buono sconto.");

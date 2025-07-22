@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './AppHeader.module.css';
 import { useAppContext } from '../../context/AppContext';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 // import mediaquery from './AppHeadermediaquery.module.css'
 
 const AppHeader = () => {
@@ -10,15 +12,24 @@ const AppHeader = () => {
   const { cart } = useAppContext();
   const navigate = useNavigate();
   const { compareList } = useAppContext();
+  const location = useLocation();
 
   const cartItemsCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   const handleSearch = (e) => {
     e.preventDefault();
+
+    const currentParams = new URLSearchParams(location.search);
+
     if (searchQuery.trim()) {
       // navigate(`/search?q=${searchQuery.trim()}`);  //nella parte interna al navigate si inserisce la chaiamta api
-      navigate(`/gallery?q=${searchQuery.trim()}`);
+      currentParams.set('q', searchQuery.trim()); // aggiorna o aggiunge parametro q
+    } else {
+      currentParams.delete('q');
+
     }
+    // Ricostruisce la query string preservando view, sort, ecc.
+    navigate(`/gallery?${currentParams.toString()}`);
   };
 
   const menuItems = [
@@ -29,6 +40,12 @@ const AppHeader = () => {
     // { name: 'Confronta Prodotti', path: '/compare' }
 
   ];
+
+
+
+  useEffect(() => {
+    setSearchQuery(''); // reset ogni volta che cambia la pagina
+  }, [location.pathname]);
 
   return (
 
